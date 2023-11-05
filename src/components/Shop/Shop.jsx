@@ -1,28 +1,54 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Shop.css";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
+import { addToDb, getShoppingCart } from "../../assets/utilities/fakedb";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] =useState([])
+  const [cart, setCart] = useState([]);
   useEffect(() => {
     fetch("products.json")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
 
-  const handleAddToCart =(product)=>{
-    const newCart= [...cart, product]
-    setCart(newCart) 
-  }
+  useEffect(() => {
+    const storedCart = getShoppingCart();
+    const saveCart =[];
 
+    for (const id in storedCart) {
+      const addedProduct = products.find(product => 
+        product.id === id)
+
+        if(addedProduct){
+
+          const quantity = storedCart[id];
+          addedProduct.quantity=quantity;
+          saveCart.push(addedProduct);
+        }
+
+    
+     
+    }
+    setCart(saveCart)
+  }, [products]);
+
+  const handleAddToCart = (product) => {
+    const newCart = [...cart, product];
+    setCart(newCart);
+    addToDb(product.id);
+  };
 
   return (
     <div className="shop-container">
       <div className="product-container">
         {products.map((product) => (
-          <Product key={product.id} product={product} handleAddToCart={handleAddToCart}></Product>
+          <Product
+            key={product.id}
+            product={product}
+            handleAddToCart={handleAddToCart}
+          ></Product>
         ))}
       </div>
 
