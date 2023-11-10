@@ -5,6 +5,8 @@ import Cart from "../Cart/Cart";
 import { addToDb, getShoppingCart } from "../../assets/utilities/fakedb";
 
 const Shop = () => {
+ 
+
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   useEffect(() => {
