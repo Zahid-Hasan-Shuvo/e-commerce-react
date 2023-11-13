@@ -9,3 +9,11 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 45px;
 }
+.shop-checkout{
+    padding: 7px;
+    border-radius: 5px;
+    color: white;
+    background-color: green;
+    margin-left: 55px;
+
+}
