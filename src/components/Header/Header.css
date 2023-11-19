@@ -10,6 +10,17 @@
     margin-top: 0px;
 
 }
+.navbar{
+    margin-left: 350px;
+}
+.signout{
+    padding: 7px;
+    border-radius: 6px;
+    margin-left: 3px;
+}
+.email{
+    color: white;
+}
 
 .header a{
     text-decoration: none;
